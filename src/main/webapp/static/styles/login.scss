@@ -1,0 +1,120 @@
+$bg-color: white;
+$primary-color: #118ab2;
+$secondary-color: #bde0fe;
+
+body {
+  background-color: $bg-color;
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.center {
+  display: grid;
+  grid-template-columns: 60% auto;
+  margin-top: 80px;
+
+  .welcome-message {
+    align-self: center;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.671);
+  }
+
+  .login-form {
+    width: 300px;
+    height: 430px;
+    padding: 0 30px;
+    background-color: white;
+    border-radius: 25px;
+    box-shadow: 0px -1px 45px 1px rgba(0, 0, 0, 0.25);
+    -webkit-box-shadow: 0px -1px 45px 1px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: 0px -1px 45px 1px rgba(0, 0, 0, 0.25);
+
+    .form-title {
+      color: $primary-color;
+      padding: 15px 0;
+    }
+
+    .form-group {
+      display: grid;
+      grid-template-columns: auto;
+      grid-template-rows: auto auto;
+      row-gap: 5px;
+      width: 100%;
+      height: fit-content;
+      margin-bottom: 15px;
+
+      label {
+        color: rgb(119, 119, 119);
+      }
+
+      input {
+        border: solid rgba(0, 0, 0, 0.192);
+        border-radius: 5px;
+        width: 100%;
+        height: 35px;
+        font-size: 1rem;
+
+        &:hover {
+          border: solid $secondary-color;
+        }
+
+        &:focus {
+          outline: 0;
+          border: solid $primary-color;
+        }
+      }
+    }
+
+    input[type='submit'] {
+      background-color: $primary-color;
+      color: white;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+      width: 80px;
+      height: 40px;
+      transition: 0.5s;
+
+      &:hover {
+        cursor: pointer;
+        background-color: #0b779b;
+        transition: 0.5s;
+      }
+    }
+  }
+
+  .user-type {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    padding: 20px 0 30px 0;
+    button {
+      background-color: #40916c;
+      color: white;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+      width: 85px;
+      height: 40px;
+      transition: 0.5s;
+
+      &:hover {
+        cursor: pointer;
+        background-color: #2d6a4f;
+        transition: 0.5s;
+      }
+    }
+  }
+}
+
+@media (max-width: 700px) {
+  .center {
+    margin-top: 0;
+    grid-template-columns: auto;
+
+    .login-form {
+      width: 280px;
+      padding: 0 20px;
+      justify-self: center;
+    }
+  }
+}

@@ -1,0 +1,55 @@
+body {
+  background-color: white;
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.center {
+  display: -ms-grid;
+  display: grid;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 100%;
+}
+
+.center .center-top {
+  text-align: center;
+}
+
+.center .center-top .candidate-photo {
+  width: 100px;
+  height: 100px;
+  background-color: black;
+}
+
+.center form {
+  background-color: white;
+  padding: 25px;
+  border-radius: 25px;
+  font-size: 1.2rem;
+}
+
+.center form .input-class {
+  margin: 15px;
+}
+
+.center form .input-class input {
+  width: 100%;
+  height: 20px;
+  font-size: 1rem;
+}
+
+.center form .input-class textarea {
+  width: 100%;
+  height: 80px;
+  font-size: 1rem;
+}
+
+@media (max-width: 700px) {
+  #vote-button {
+    width: 120px;
+    height: 50px;
+  }
+}
+/*# sourceMappingURL=candidate-register.css.map */

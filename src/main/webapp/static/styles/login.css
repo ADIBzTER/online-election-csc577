@@ -1,0 +1,134 @@
+body {
+  background-color: white;
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.center {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 60% auto;
+      grid-template-columns: 60% auto;
+  margin-top: 80px;
+}
+
+.center .welcome-message {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.671);
+}
+
+.center .login-form {
+  width: 300px;
+  height: 430px;
+  padding: 0 30px;
+  background-color: white;
+  border-radius: 25px;
+  box-shadow: 0px -1px 45px 1px rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: 0px -1px 45px 1px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 0px -1px 45px 1px rgba(0, 0, 0, 0.25);
+}
+
+.center .login-form .form-title {
+  color: #118ab2;
+  padding: 15px 0;
+}
+
+.center .login-form .form-group {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: auto;
+      grid-template-columns: auto;
+  -ms-grid-rows: auto auto;
+      grid-template-rows: auto auto;
+  row-gap: 5px;
+  width: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  margin-bottom: 15px;
+}
+
+.center .login-form .form-group label {
+  color: #777777;
+}
+
+.center .login-form .form-group input {
+  border: solid rgba(0, 0, 0, 0.192);
+  border-radius: 5px;
+  width: 100%;
+  height: 35px;
+  font-size: 1rem;
+}
+
+.center .login-form .form-group input:hover {
+  border: solid #bde0fe;
+}
+
+.center .login-form .form-group input:focus {
+  outline: 0;
+  border: solid #118ab2;
+}
+
+.center .login-form input[type='submit'] {
+  background-color: #118ab2;
+  color: white;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  width: 80px;
+  height: 40px;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.center .login-form input[type='submit']:hover {
+  cursor: pointer;
+  background-color: #0b779b;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.center .user-type {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: auto auto auto;
+      grid-template-columns: auto auto auto;
+  padding: 20px 0 30px 0;
+}
+
+.center .user-type button {
+  background-color: #40916c;
+  color: white;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  width: 85px;
+  height: 40px;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.center .user-type button:hover {
+  cursor: pointer;
+  background-color: #2d6a4f;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+@media (max-width: 700px) {
+  .center {
+    margin-top: 0;
+    -ms-grid-columns: auto;
+        grid-template-columns: auto;
+  }
+  .center .login-form {
+    width: 280px;
+    padding: 0 20px;
+    -ms-grid-column-align: center;
+        justify-self: center;
+  }
+}
+/*# sourceMappingURL=login.css.map */
