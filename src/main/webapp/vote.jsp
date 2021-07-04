@@ -27,7 +27,7 @@
 					<c:forEach items="${ candidateList }" var="candidate">
 						<div class="grid-item">
 							<img class="candidate-image"
-								src="https://images2.minutemediacdn.com/image/upload/c_crop,h_726,w_1292,x_199,y_0/f_auto,q_auto,w_1100/v1578352479/shape/mentalfloss/62455-shout-factory1.jpg"
+								src="${ candidate.imageLocation }"
 								alt="candidate-image">
 							<p>Name: ${ candidate.name }</p>
 							<p>Faculty: ${ candidate.faculty }</p>

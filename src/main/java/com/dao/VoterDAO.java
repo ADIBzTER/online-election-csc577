@@ -84,4 +84,57 @@ public class VoterDAO {
 		}
 		return voter;
 	}
+
+	public static void voted(String userId) {
+
+		// Preparing some objects for connection
+		PreparedStatement statement = null;
+
+		// Prepared statement
+		String sql = "UPDATE voters SET v_voted = ? WHERE v_userid = ?;";
+
+		// Used to trace the process
+		System.out.println("in VoterDAO.voted");
+
+		try {
+			// Connect to lipan_db
+			connection = ConnectionManager.getConnection();
+
+			// Prepared statement
+			statement = connection.prepareStatement(sql);
+
+			statement.setInt(1, 1);
+			statement.setString(2, userId);
+
+			statement.executeUpdate();
+			System.out.println("Voter voted");
+
+		} catch (Exception e) {
+			System.out.println("Error in VoterDAO.voted" + e);
+		}
+		// Some exception handling
+		finally {
+			if (resultSet != null) {
+				try {
+					resultSet.close();
+				} catch (Exception e) {
+				}
+				resultSet = null;
+			}
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (Exception e) {
+				}
+				statement = null;
+			}
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (Exception e) {
+				}
+				connection = null;
+			}
+		}
+	}
 }

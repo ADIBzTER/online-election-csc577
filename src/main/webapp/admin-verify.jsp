@@ -17,53 +17,44 @@
 <body>
 	<div class="center">
 		<div class="center-top">
-			<h1>Candidate Verification</h1>
-			<img class="candidate-photo" alt="candidate-image">
+			<h1>Candidate Validation</h1>
+			<img class="candidate-photo" src="${ candidate.imageLocation }" alt="candidate-image">
 		</div>
 
-		<form action="candidate" method="POST" enctype="multipart/form-data">
-			Photo: <input id="photo-input" type="file" name="photo"
-				accept=".png,.jpg,.jpeg" required />
+		<form action="admin" method="POST">
 
 			<div class="input-class">
 				Full Name<input type="text" name="name" autocomplete="off"
-					value="${ name }" readonly />
+					value="${ candidate.name }" disabled />
 			</div>
 
 			<div class="input-class">
 				Student ID<input type="text" name="userId" autocomplete="off"
-					value="${ userId }" readonly />
+					value="${ candidate.userId }" disabled />
 			</div>
 
 			<div class="input-class">
 				Faculty<input type="text" name="faculty" autocomplete="off"
-					value="${ faculty }" readonly />
+					value="${ candidate.faculty }" disabled />
 			</div>
 
 			<div class="input-class">
 				<legend>Achievement</legend>
 				<textarea rows="5" cols="20" name="achievement" autocomplete="off"
-					required></textarea>
+					disabled>${ candidate.achievement }</textarea>
 			</div>
 
 			<div class="input-class">
 				<legend>Manifesto</legend>
 				<textarea rows="5" cols="20" name="manifesto" autocomplete="off"
-					required></textarea>
+					disabled>${ candidate.manifesto }</textarea>
 			</div>
 
-			<input type="submit" value="VERIFY" />
+			<button>Approve And Display To Voters</button>
+			<button>Decline</button>
 		</form>
 	</div>
 
-	<script>
-		const photoInput = document.querySelector('#photo-input');
-		photoInput.onchange = (e) => {
-			let candidatePhoto = document.querySelector('.candidate-photo');
-			let photoUrl = URL.createObjectURL(photoInput.files[0]);
-			candidatePhoto.src = photoUrl;
-		};
-	</script>
 </body>
 
 </html>

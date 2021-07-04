@@ -4,6 +4,7 @@ public class CandidateBean extends StudentBean {
 	private String imageLocation;
 	private String achievement;
 	private String manifesto;
+	private boolean approved;
 	private int votes;
 
 	public String getImageLocation() {
@@ -28,6 +29,14 @@ public class CandidateBean extends StudentBean {
 
 	public void setManifesto(String manifesto) {
 		this.manifesto = manifesto;
+	}
+
+	public boolean isApproved() {
+		return approved;
+	}
+
+	public void setApproved(boolean approved) {
+		this.approved = approved;
 	}
 
 	public int getVotes() {

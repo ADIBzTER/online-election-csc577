@@ -17,10 +17,11 @@ import com.dao.*;
 public class VoteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	// Get html page
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		List<CandidateBean> candidateList = CandidateDAO.getAll();
+		List<CandidateBean> candidateList = CandidateDAO.getAllApproved();
 
 		request.setAttribute("candidateList", candidateList);
 
@@ -28,12 +29,14 @@ public class VoteServlet extends HttpServlet {
 		rd.forward(request, response);
 	}
 
+	// Add vote to database
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		String userId = request.getParameter("userId");
 
 		CandidateDAO.addVote(userId);
+		VoterDAO.voted(userId);
 
 		response.sendRedirect("login");
 	}

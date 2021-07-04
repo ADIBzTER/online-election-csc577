@@ -27,13 +27,11 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String userType = request.getParameter("userType");
-		String userId;
-		String password;
+		String userId = request.getParameter("userId");
+		String password = request.getParameter("password");
 
 		// Voter or Candidate
 		if (userType.equals("voter") || userType.equals("candidate")) {
-			userId = request.getParameter("userId");
-			password = request.getParameter("password");
 
 			StudentBean student = new StudentBean();
 			student.setUserId(userId);
@@ -73,6 +71,36 @@ public class LoginServlet extends HttpServlet {
 
 			// Admin
 		} else if (userType.equals("admin")) {
+
+			AdminBean admin = new AdminBean();
+			admin.setUserId(userId);
+			admin.setPassword(password);
+
+			// Log in & get student's data
+			admin = AdminDAO.login(admin);
+
+			try {
+				if (admin.isValid()) {
+					// Logged-in page
+					request.getSession(true).invalidate();
+					HttpSession session = request.getSession(true);
+
+					session.setAttribute("loggedIn", true);
+					session.setAttribute("userId", admin.getUserId());
+					session.setAttribute("name", admin.getName());
+
+					System.out.println(admin.getUserId() + " logged in as Admin.");
+					response.sendRedirect("admin");
+
+				} else {
+					// Error page
+					RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+					request.setAttribute("errorMessage", "Invalid Credentials");
+					rd.forward(request, response);
+				}
+			} catch (Throwable e) {
+				System.out.println(e);
+			}
 
 		}
 

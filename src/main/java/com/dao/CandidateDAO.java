@@ -15,7 +15,7 @@ public class CandidateDAO {
 		String imageLocation = candidate.getImageLocation();
 		String achievement = candidate.getAchievement();
 		String manifesto = candidate.getManifesto();
-		
+
 		PreparedStatement preparedStatement = null;
 
 		// Trace process
@@ -42,7 +42,7 @@ public class CandidateDAO {
 	public static List<CandidateBean> getAll() {
 		// Preparing some objects/variable
 		List<CandidateBean> candidateList = new LinkedList<>();
-		String sql = "SELECT * FROM candidates;";
+		String sql = "SELECT * FROM candidates c JOIN students s ON c.c_userid=s.s_userid;";
 
 		Statement statement = null;
 
@@ -61,9 +61,72 @@ public class CandidateDAO {
 			while (resultSet.next()) {
 
 				CandidateBean candidate = new CandidateBean();
-				candidate.setUserId(resultSet.getString("c_userid"));
-				candidate.setName(resultSet.getString("c_name"));
-				candidate.setFaculty(resultSet.getString("c_faculty"));
+				candidate.setUserId(resultSet.getString("s_userid"));
+				candidate.setName(resultSet.getString("s_name"));
+				candidate.setFaculty(resultSet.getString("s_faculty"));
+				candidate.setImageLocation(resultSet.getString("c_image_location"));
+				candidate.setAchievement(resultSet.getString("c_achievement"));
+				candidate.setManifesto(resultSet.getString("c_manifesto"));
+				candidate.setApproved(resultSet.getBoolean("c_approved"));
+				candidate.setVotes(resultSet.getInt("c_votes"));
+
+				candidateList.add(candidate);
+			}
+		} catch (Exception e) {
+			System.out.println("Error in CandidateDAO.getAll " + e);
+		}
+		// Some exception handling
+		finally {
+			if (resultSet != null) {
+				try {
+					resultSet.close();
+				} catch (Exception e) {
+				}
+				resultSet = null;
+			}
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (Exception e) {
+				}
+				statement = null;
+			}
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (Exception e) {
+				}
+				connection = null;
+			}
+		}
+		return candidateList;
+	}
+
+	public static List<CandidateBean> getAllApproved() {
+		// Preparing some objects/variable
+		List<CandidateBean> candidateList = new LinkedList<>();
+		String sql = "SELECT * FROM candidates c JOIN students s ON c.c_userid=s.s_userid WHERE c_approved=1;";
+
+		Statement statement = null;
+
+		// Trace process
+		System.out.println("in CandidateDAO.getAll");
+
+		try {
+			// Connect to DB
+			connection = ConnectionManager.getConnection();
+
+			statement = connection.createStatement();
+
+			resultSet = statement.executeQuery(sql);
+
+			// Iterate over the ResultSet, add row into object and object into list
+			while (resultSet.next()) {
+
+				CandidateBean candidate = new CandidateBean();
+				candidate.setUserId(resultSet.getString("s_userid"));
+				candidate.setName(resultSet.getString("s_name"));
+				candidate.setFaculty(resultSet.getString("s_faculty"));
 				candidate.setImageLocation(resultSet.getString("c_image_location"));
 				candidate.setAchievement(resultSet.getString("c_achievement"));
 				candidate.setManifesto(resultSet.getString("c_manifesto"));
@@ -99,6 +162,67 @@ public class CandidateDAO {
 			}
 		}
 		return candidateList;
+	}
+
+	// Get only one candidate
+	public static CandidateBean getOne(String userId) {
+
+		// Preparing some objects/variable
+		CandidateBean candidate = new CandidateBean();
+		String sql = "SELECT * FROM candidates c JOIN students s ON c.c_userid=s.s_userid WHERE c_userid=?;";
+
+		PreparedStatement statement = null;
+
+		// Trace process
+		System.out.println("in CandidateDAO.getOne");
+
+		try {
+			// Connect to DB
+			connection = ConnectionManager.getConnection();
+			statement = connection.prepareStatement(sql);
+
+			statement.setString(1, userId);
+
+			resultSet = statement.executeQuery();
+
+			// Iterate over the ResultSet, add row into object and object into list
+			while (resultSet.next()) {
+				candidate.setUserId(resultSet.getString("s_userid"));
+				candidate.setName(resultSet.getString("s_name"));
+				candidate.setFaculty(resultSet.getString("s_faculty"));
+				candidate.setImageLocation(resultSet.getString("c_image_location"));
+				candidate.setAchievement(resultSet.getString("c_achievement"));
+				candidate.setManifesto(resultSet.getString("c_manifesto"));
+				candidate.setVotes(resultSet.getInt("c_votes"));
+			}
+		} catch (Exception e) {
+			System.out.println("Error in CandidateDAO.getOne " + e);
+		}
+		// Some exception handling
+		finally {
+			if (resultSet != null) {
+				try {
+					resultSet.close();
+				} catch (Exception e) {
+				}
+				resultSet = null;
+			}
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (Exception e) {
+				}
+				statement = null;
+			}
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (Exception e) {
+				}
+				connection = null;
+			}
+		}
+		return candidate;
 	}
 
 	public static int getVotes(String userId) {
