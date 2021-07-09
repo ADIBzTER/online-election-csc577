@@ -20,10 +20,10 @@ body {
   .row-div {
     display: grid;
     width: 80%;
-		grid-template-columns: 1fr 4fr 1fr;
+    grid-template-columns: 1fr 4fr 1fr;
     height: fit-content;
     margin-bottom: 50px;
-    padding: 0 30px;
+    padding: 20px 30px;
     justify-self: center;
     background-color: white;
     border-radius: 25px;
@@ -31,35 +31,30 @@ body {
     -webkit-box-shadow: 0px -1px 45px 1px rgba(0, 0, 0, 0.25);
     -moz-box-shadow: 0px -1px 45px 1px rgba(0, 0, 0, 0.25);
 
-		.candidate-image {
-			width: 100%;
-		}
-  }
-}
+    .candidate-image {
+      width: 100%;
+      border: solid 1px black;
+    }
+    .candidate-details {
+			padding-left: 10px;
+    }
 
-#vote-button {
-  position: fixed;
-  bottom: 10px;
-  right: 30px;
-  background-color: #40916c;
-  color: white;
-  font-size: 1rem;
-  border: none;
-  border-radius: 5px;
-  width: 150px;
-  height: 60px;
-  transition: 0.5s;
+    .details-button {
+      background-color: #40916c;
+      color: white;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+      transition: 0.5s;
 
-  &:hover {
-    cursor: pointer;
-    background-color: #2d6a4f;
-    transition: 0.5s;
+      &:hover {
+        cursor: pointer;
+        background-color: #2d6a4f;
+        transition: 0.5s;
+      }
+    }
   }
 }
 
 @media (max-width: 700px) {
-  #vote-button {
-    width: 120px;
-    height: 50px;
-  }
 }

@@ -137,4 +137,60 @@ public class VoterDAO {
 			}
 		}
 	}
+
+	public static boolean checkIsVoted(String userId) {
+		boolean voted = false;
+
+		// Preparing some objects for connection
+		PreparedStatement statement = null;
+
+		// Prepared statement
+		String sql = "SELECT v_voted FROM voters WHERE v_userid=?";
+
+		// Used to trace the process
+		System.out.println("in VoterDAO.checkIsVoted");
+
+		try {
+			// Connect to lipan_db
+			connection = ConnectionManager.getConnection();
+
+			// Prepared statement
+			statement = connection.prepareStatement(sql);
+
+			statement.setString(1, userId);
+
+			resultSet = statement.executeQuery();
+			
+			resultSet.next();
+			voted = resultSet.getBoolean("v_voted");
+
+		} catch (Exception e) {
+			System.out.println("Error in VoterDAO.checkIsVoted" + e);
+		}
+		// Some exception handling
+		finally {
+			if (resultSet != null) {
+				try {
+					resultSet.close();
+				} catch (Exception e) {
+				}
+				resultSet = null;
+			}
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (Exception e) {
+				}
+				statement = null;
+			}
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (Exception e) {
+				}
+				connection = null;
+			}
+		}
+		return voted;
+	}
 }

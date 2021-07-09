@@ -291,7 +291,7 @@ public class CandidateDAO {
 		PreparedStatement statement = null;
 
 		// Prepared statement
-		String sql = "UPDATE candidates SET c_approved = 1 WHERE c_userid = ?;";
+		String sql = "UPDATE candidates SET c_approved = ? WHERE c_userid = ?;";
 
 		// Used to trace the process
 		System.out.println("in CandidateDAO.approve");
@@ -303,7 +303,8 @@ public class CandidateDAO {
 			// Prepared statement
 			statement = connection.prepareStatement(sql);
 
-			statement.setString(1, userId);
+			statement.setBoolean(1, true);
+			statement.setString(2, userId);
 
 			statement.executeUpdate();
 			System.out.println("User Approved");
@@ -388,5 +389,62 @@ public class CandidateDAO {
 				connection = null;
 			}
 		}
+	}
+
+	public static boolean checkIsRegistered(String userId) {
+		boolean registered = false;
+
+		// Preparing some objects for connection
+		PreparedStatement statement = null;
+
+		// Prepared statement
+		String sql = "SELECT c_userid FROM candidates WHERE c_userid=?";
+
+		// Used to trace the process
+		System.out.println("in CandidateDAO.checkIsRegistered");
+
+		try {
+			// Connect to lipan_db
+			connection = ConnectionManager.getConnection();
+
+			// Prepared statement
+			statement = connection.prepareStatement(sql);
+
+			statement.setString(1, userId);
+
+			resultSet = statement.executeQuery();
+
+			if (resultSet.next()) {
+				registered = true;
+			}
+
+		} catch (Exception e) {
+			System.out.println("Error in CandidateDAO.checkIsRegistered" + e);
+		}
+		// Some exception handling
+		finally {
+			if (resultSet != null) {
+				try {
+					resultSet.close();
+				} catch (Exception e) {
+				}
+				resultSet = null;
+			}
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (Exception e) {
+				}
+				statement = null;
+			}
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (Exception e) {
+				}
+				connection = null;
+			}
+		}
+		return registered;
 	}
 }

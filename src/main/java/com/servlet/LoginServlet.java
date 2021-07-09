@@ -52,9 +52,27 @@ public class LoginServlet extends HttpServlet {
 					session.setAttribute("faculty", student.getFaculty());
 
 					if (userType.equals("voter")) {
+						if (VoterDAO.checkIsVoted(student.getUserId())) {
+							request.getSession(true).invalidate();
+
+							RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+							request.setAttribute("errorMessage", "You already voted");
+							rd.forward(request, response);
+							return;
+						}
+
 						System.out.println(student.getUserId() + " logged in as Voter.");
 						response.sendRedirect("vote");
 					} else if (userType.equals("candidate")) {
+						if (CandidateDAO.checkIsRegistered(student.getUserId())) {
+							request.getSession(true).invalidate();
+
+							RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+							request.setAttribute("errorMessage", "You already registered as candidate");
+							rd.forward(request, response);
+							return;
+						}
+
 						System.out.println(student.getUserId() + " logged in as Voter.");
 						response.sendRedirect("candidate");
 					}

@@ -26,10 +26,10 @@
 					<img class="candidate-image" src="${ candidate.imageLocation }"
 						alt="candidate-image">
 					<div class="candidate-details">
-						<p>Name: ${ candidate.name }</p>
-						<p>Student ID: ${ candidate.faculty }</p>
+						<h3>Name: ${ candidate.name }</h3>
+						<h3>Student ID: ${ candidate.faculty }</h3>
 					</div>
-					<button
+					<button class="details-button"
 						onclick="location.href = 'admin?candidateId=${ candidate.userId }';">More
 						Details</button>
 				</div>
@@ -46,10 +46,10 @@
 					<img class="candidate-image" src="${ candidate.imageLocation }"
 						alt="candidate-image">
 					<div class="candidate-details">
-						<p>Name: ${ candidate.name }</p>
-						<p>Student ID: ${ candidate.faculty }</p>
+						<h3>Name: ${ candidate.name }</h3>
+						<h3>Student ID: ${ candidate.faculty }</h3>
 					</div>
-					<button
+					<button class="details-button"
 						onclick="location.href = 'admin?candidateId=${ candidate.userId }';">More
 						Details</button>
 				</div>

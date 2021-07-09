@@ -27,7 +27,7 @@ body {
   height: -moz-fit-content;
   height: fit-content;
   margin-bottom: 50px;
-  padding: 0 30px;
+  padding: 20px 30px;
   -ms-grid-column-align: center;
       justify-self: center;
   background-color: white;
@@ -39,34 +39,27 @@ body {
 
 .center .row-div .candidate-image {
   width: 100%;
+  border: solid 1px black;
 }
 
-#vote-button {
-  position: fixed;
-  bottom: 10px;
-  right: 30px;
+.center .row-div .candidate-details {
+  padding-left: 10px;
+}
+
+.center .row-div .details-button {
   background-color: #40916c;
   color: white;
   font-size: 1rem;
   border: none;
   border-radius: 5px;
-  width: 150px;
-  height: 60px;
   -webkit-transition: 0.5s;
   transition: 0.5s;
 }
 
-#vote-button:hover {
+.center .row-div .details-button:hover {
   cursor: pointer;
   background-color: #2d6a4f;
   -webkit-transition: 0.5s;
   transition: 0.5s;
-}
-
-@media (max-width: 700px) {
-  #vote-button {
-    width: 120px;
-    height: 50px;
-  }
 }
 /*# sourceMappingURL=admin.css.map */

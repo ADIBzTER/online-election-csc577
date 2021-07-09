@@ -21,14 +21,14 @@
 		</div>
 
 		<div class="vote-div">
-			<div class="grid-div">
+			<form action="vote" method="POST">
+				<div class="grid-div">
 
-				<form action="vote" method="POST">
 					<c:forEach items="${ candidateList }" var="candidate">
 						<div class="grid-item">
-							<img class="candidate-image"
-								src="${ candidate.imageLocation }"
-								alt="candidate-image">
+							<div class="candidate-image">
+								<img src="${ candidate.imageLocation }" alt="candidate-image">
+							</div>
 							<p>Name: ${ candidate.name }</p>
 							<p>Faculty: ${ candidate.faculty }</p>
 							<p>Achievement: ${ candidate.achievement }</p>
@@ -39,9 +39,9 @@
 								for="${ candidate.userId }">Choose Me</label>
 						</div>
 					</c:forEach>
-				</form>
+				</div>
+			</form>
 
-			</div>
 		</div>
 
 		<button id="vote-button">Vote</button>

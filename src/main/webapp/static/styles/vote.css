@@ -23,7 +23,7 @@ body {
   height: -moz-fit-content;
   height: fit-content;
   margin-bottom: 50px;
-  padding: 0 30px;
+  padding: 20px 30px;
   -ms-grid-column-align: center;
       justify-self: center;
   background-color: white;
@@ -48,6 +48,12 @@ body {
 }
 
 .center .vote-div .grid-div .grid-item .candidate-image {
+  width: 100px;
+  height: 100px;
+  border: solid 1px black;
+}
+
+.center .vote-div .grid-div .grid-item .candidate-image img {
   width: 100%;
 }
 
