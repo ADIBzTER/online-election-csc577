@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -18,7 +17,8 @@
 	<div class="center">
 		<div class="center-top">
 			<h1>Candidate Verification</h1>
-			<img class="candidate-photo" alt="candidate-image">
+			<img class="candidate-photo" src="images/person-icon.png"
+				alt="candidate-image">
 		</div>
 
 		<form action="candidate" method="POST" enctype="multipart/form-data">
@@ -52,7 +52,7 @@
 					required></textarea>
 			</div>
 
-			<input type="submit" value="VERIFY" />
+			<input id='verify-button' type="submit" value="VERIFY" />
 		</form>
 	</div>
 

@@ -285,6 +285,58 @@ public class CandidateDAO {
 		return votes;
 	}
 
+	public static void approve(String userId) {
+
+		// Preparing some objects for connection
+		PreparedStatement statement = null;
+
+		// Prepared statement
+		String sql = "UPDATE candidates SET c_approved = 1 WHERE c_userid = ?;";
+
+		// Used to trace the process
+		System.out.println("in CandidateDAO.approve");
+
+		try {
+			// Connect to lipan_db
+			connection = ConnectionManager.getConnection();
+
+			// Prepared statement
+			statement = connection.prepareStatement(sql);
+
+			statement.setString(1, userId);
+
+			statement.executeUpdate();
+			System.out.println("User Approved");
+
+		} catch (Exception e) {
+			System.out.println("Error in CandidateDAO.approve" + e);
+		}
+		// Some exception handling
+		finally {
+			if (resultSet != null) {
+				try {
+					resultSet.close();
+				} catch (Exception e) {
+				}
+				resultSet = null;
+			}
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (Exception e) {
+				}
+				statement = null;
+			}
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (Exception e) {
+				}
+				connection = null;
+			}
+		}
+	}
+
 	public static void addVote(String userId) {
 
 		// Preparing some objects for connection

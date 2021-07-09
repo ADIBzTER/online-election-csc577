@@ -20,14 +20,18 @@ body {
 .center .center-top .candidate-photo {
   width: 100px;
   height: 100px;
-  background-color: black;
+  border: solid 1px black;
 }
 
 .center form {
   background-color: white;
+  width: 50vw;
   padding: 25px;
   border-radius: 25px;
   font-size: 1.2rem;
+  box-shadow: 0px -1px 45px 1px rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: 0px -1px 45px 1px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 0px -1px 45px 1px rgba(0, 0, 0, 0.25);
 }
 
 .center form .input-class {
@@ -46,7 +50,29 @@ body {
   font-size: 1rem;
 }
 
+.center form #verify-button {
+  background-color: #118ab2;
+  color: white;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  width: 80px;
+  height: 40px;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.center form #verify-button:hover {
+  cursor: pointer;
+  background-color: #0b779b;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
 @media (max-width: 700px) {
+  .center form {
+    width: 80vw;
+  }
   #vote-button {
     width: 120px;
     height: 50px;

@@ -2,11 +2,12 @@ let userType = localStorage.getItem('userType');
 
 let userTypeButtons = document.querySelectorAll('.user-type-button');
 userTypeButtons.forEach((button) => {
-  button.addEventListener('click', (e) => {
+  button.onclick = (e) => {
+    e.preventDefault();
     userType = e.target.dataset.userType;
     localStorage.setItem('userType', userType);
     location.reload();
-  });
+  };
 });
 
 let formTitle = document.querySelector('.form-title > h1');

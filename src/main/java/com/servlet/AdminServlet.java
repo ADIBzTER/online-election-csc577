@@ -52,6 +52,8 @@ public class AdminServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		CandidateDAO.approve(request.getParameter("userId"));
+		response.sendRedirect("admin");
 
 //		String userRegistered = registerDAO.registerUser(candidate);
 

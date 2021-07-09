@@ -18,10 +18,12 @@
 	<div class="center">
 		<div class="center-top">
 			<h1>Candidate Validation</h1>
-			<img class="candidate-photo" src="${ candidate.imageLocation }" alt="candidate-image">
+			<img class="candidate-photo" src="${ candidate.imageLocation }"
+				alt="candidate-image">
 		</div>
 
 		<form action="admin" method="POST">
+			<input type="hidden" name="userId" value="${ candidate.userId }">
 
 			<div class="input-class">
 				Full Name<input type="text" name="name" autocomplete="off"
@@ -51,10 +53,17 @@
 			</div>
 
 			<button>Approve And Display To Voters</button>
-			<button>Decline</button>
+			<button id="decline-button">Decline</button>
 		</form>
 	</div>
 
+	<script>
+	const declineButton = document.querySelector('#decline-button');
+	declineButton.onclick = (e) => {
+		e.preventDefault();
+		alert('decline');
+	}
+</script>
 </body>
 
 </html>

@@ -38,7 +38,8 @@ public class VoteServlet extends HttpServlet {
 		CandidateDAO.addVote(userId);
 		VoterDAO.voted(userId);
 
-		response.sendRedirect("login");
+		RequestDispatcher rd = request.getRequestDispatcher("voteSuccessful.jsp");
+		rd.forward(request, response);
 	}
 
 }

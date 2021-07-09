@@ -38,6 +38,7 @@
 					<label for="password">Password</label> <input type="password"
 						name="password" id="password" autocomplete="off" required>
 				</div>
+				<p class="warning-message">${ errorMessage }</p>
 
 				<div class="user-type">
 					<button data-user-type="voter" id="voter-button"
