@@ -20,8 +20,23 @@ public class LoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
-		rd.forward(request, response);
+		// Dispose session
+		request.getSession(true).invalidate();
+
+		try {
+			// Election ended
+			if (AdminDAO.isElectionEnded()) {
+				CandidateBean candidate = CandidateDAO.getMostVoted();
+				request.setAttribute("candidate", candidate);
+				RequestDispatcher rd = request.getRequestDispatcher("electionEnded.jsp");
+				rd.forward(request, response);
+			} else {
+				RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+				rd.forward(request, response);
+			}
+		} catch (Throwable e) {
+			System.out.println(e);
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -52,6 +67,8 @@ public class LoginServlet extends HttpServlet {
 					session.setAttribute("faculty", student.getFaculty());
 
 					if (userType.equals("voter")) {
+						session.setAttribute("voter", true);
+
 						if (VoterDAO.checkIsVoted(student.getUserId())) {
 							request.getSession(true).invalidate();
 
@@ -64,6 +81,8 @@ public class LoginServlet extends HttpServlet {
 						System.out.println(student.getUserId() + " logged in as Voter.");
 						response.sendRedirect("vote");
 					} else if (userType.equals("candidate")) {
+						session.setAttribute("candidate", true);
+
 						if (CandidateDAO.checkIsRegistered(student.getUserId())) {
 							request.getSession(true).invalidate();
 
@@ -104,6 +123,7 @@ public class LoginServlet extends HttpServlet {
 					HttpSession session = request.getSession(true);
 
 					session.setAttribute("loggedIn", true);
+					session.setAttribute("admin", true);
 					session.setAttribute("userId", admin.getUserId());
 					session.setAttribute("name", admin.getName());
 

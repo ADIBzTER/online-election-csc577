@@ -34,9 +34,11 @@
 							<p>Achievement: ${ candidate.achievement }</p>
 							<p>Manifesto: ${ candidate.manifesto }</p>
 
-							<input type="radio" name="userId" id="${ candidate.userId }"
-								value="${ candidate.userId }"> <label
-								for="${ candidate.userId }">Choose Me</label>
+							<div class="choose-div">
+								<input type="radio" name="candidateId" id="${ candidate.userId }"
+									value="${ candidate.userId }"> <label
+									for="${ candidate.userId }">Choose Me</label>
+							</div>
 						</div>
 					</c:forEach>
 				</div>

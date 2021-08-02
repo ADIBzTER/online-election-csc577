@@ -39,6 +39,28 @@ public class CandidateDAO {
 		}
 	}
 
+	public static void deleteOne(String userId) {
+
+		PreparedStatement preparedStatement = null;
+
+		// Trace process
+		System.out.println("In CandidateDAO.deleteOne");
+		try {
+
+			connection = ConnectionManager.getConnection();
+
+			String sql = "DELETE FROM candidates WHERE c_userid=?";
+
+			preparedStatement = connection.prepareStatement(sql);
+
+			preparedStatement.setString(1, userId);
+
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
 	public static List<CandidateBean> getAll() {
 		// Preparing some objects/variable
 		List<CandidateBean> candidateList = new LinkedList<>();
@@ -197,6 +219,65 @@ public class CandidateDAO {
 			}
 		} catch (Exception e) {
 			System.out.println("Error in CandidateDAO.getOne " + e);
+		}
+		// Some exception handling
+		finally {
+			if (resultSet != null) {
+				try {
+					resultSet.close();
+				} catch (Exception e) {
+				}
+				resultSet = null;
+			}
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (Exception e) {
+				}
+				statement = null;
+			}
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (Exception e) {
+				}
+				connection = null;
+			}
+		}
+		return candidate;
+	}
+
+	// Get most voted candidate
+	public static CandidateBean getMostVoted() {
+
+		// Preparing some objects/variable
+		CandidateBean candidate = new CandidateBean();
+		String sql = "SELECT *, MAX(c_votes) as c_votes FROM candidates c JOIN students s ON c.c_userid=s.s_userid;";
+
+		PreparedStatement statement = null;
+
+		// Trace process
+		System.out.println("in CandidateDAO.getMostVoted");
+
+		try {
+			// Connect to DB
+			connection = ConnectionManager.getConnection();
+			statement = connection.prepareStatement(sql);
+
+			resultSet = statement.executeQuery();
+
+			// Iterate over the ResultSet, add row into object and object into list
+			while (resultSet.next()) {
+				candidate.setUserId(resultSet.getString("s_userid"));
+				candidate.setName(resultSet.getString("s_name"));
+				candidate.setFaculty(resultSet.getString("s_faculty"));
+				candidate.setImageLocation(resultSet.getString("c_image_location"));
+				candidate.setAchievement(resultSet.getString("c_achievement"));
+				candidate.setManifesto(resultSet.getString("c_manifesto"));
+				candidate.setVotes(resultSet.getInt("c_votes"));
+			}
+		} catch (Exception e) {
+			System.out.println("Error in CandidateDAO.getMostVoted " + e);
 		}
 		// Some exception handling
 		finally {

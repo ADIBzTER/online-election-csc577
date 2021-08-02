@@ -10,7 +10,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="static/styles/candidate-register.css">
+<link rel="stylesheet" href="static/styles/candidate-details.css">
 <title>Candidate Form | UiTM Jasin</title>
 </head>
 
@@ -52,16 +52,37 @@
 					disabled>${ candidate.manifesto }</textarea>
 			</div>
 
-			<button>Approve And Display To Voters</button>
-			<button id="decline-button">Decline</button>
+			<c:if test="${ param.approved == null }">
+				<button id="approve-button">Approve And Display To Voters</button>
+				<button id="decline-button">Decline</button>
+			</c:if>
+			<button id="back-button">Back</button>
+
 		</form>
 	</div>
 
 	<script>
+	const approveButton = document.querySelector('#approve-button');
+	approveButton.onclick = (e) => {
+		const string = 'Approve Candidate?';
+		if (!confirm(string)) {
+			e.preventDefault();
+		}
+	}
+
 	const declineButton = document.querySelector('#decline-button');
 	declineButton.onclick = (e) => {
 		e.preventDefault();
-		alert('decline');
+		const string = 'Decline Candidate?';
+		if (confirm(string)) {
+			location.href = 'admin?decline=true&userId=${ candidate.userId }';
+		}
+	}
+
+	const backButton = document.querySelector('#back-button');
+	backButton.onclick = (e) => {
+		e.preventDefault();
+		location.href = 'admin';
 	}
 </script>
 </body>

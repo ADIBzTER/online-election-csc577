@@ -25,6 +25,13 @@ public class CandidateServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		// Candidate  not logged in
+		Object loggedIn = request.getSession(true).getAttribute("candidate");
+		if (loggedIn == null) {
+			response.sendRedirect("login");
+			return;
+		}
+
 		RequestDispatcher dispatcher = request.getRequestDispatcher("candidateRegister.jsp");
 		dispatcher.forward(request, response);
 	}
@@ -56,7 +63,8 @@ public class CandidateServlet extends HttpServlet {
 
 			CandidateDAO.addOne(candidate);
 
-			response.sendRedirect("login");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("registerSuccessful.jsp");
+			dispatcher.forward(request, response);
 
 		} catch (Throwable e) {
 			System.out.println(e);

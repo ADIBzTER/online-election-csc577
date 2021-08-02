@@ -103,7 +103,7 @@ public class VoterDAO {
 			// Prepared statement
 			statement = connection.prepareStatement(sql);
 
-			statement.setInt(1, 1);
+			statement.setBoolean(1, true);
 			statement.setString(2, userId);
 
 			statement.executeUpdate();
@@ -160,7 +160,7 @@ public class VoterDAO {
 			statement.setString(1, userId);
 
 			resultSet = statement.executeQuery();
-			
+
 			resultSet.next();
 			voted = resultSet.getBoolean("v_voted");
 

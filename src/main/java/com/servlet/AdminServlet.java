@@ -23,7 +23,33 @@ public class AdminServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		if (request.getParameter("candidateId") == null) {
+		// Admin not logged in
+		Object loggedIn = request.getSession(true).getAttribute("admin");
+		if (loggedIn == null) {
+			response.sendRedirect("login");
+			return;
+		}
+
+		// End Election
+		if (request.getParameter("endElection") != null) {
+			try {
+				AdminDAO.endElection();
+				response.sendRedirect("admin");
+			} catch (Throwable e) {
+				System.out.println(e);
+			}
+		}
+		// Delete candidate
+		else if (request.getParameter("decline") != null) {
+			try {
+				CandidateDAO.deleteOne(request.getParameter("userId"));
+				response.sendRedirect("admin");
+			} catch (Throwable e) {
+				System.out.println(e);
+			}
+		}
+		// Display candidates
+		else if (request.getParameter("candidateId") == null) {
 			try {
 				List<CandidateBean> candidateList = CandidateDAO.getAll();
 				request.setAttribute("candidateList", candidateList);
@@ -34,19 +60,26 @@ public class AdminServlet extends HttpServlet {
 			} catch (Throwable e) {
 				System.out.println(e);
 			}
-		} else {
-			try {
-				String candidateId = request.getParameter("candidateId");
+		}
+		// Show candidate details (Approved)
+		else if (request.getParameter("approved") != null) {
+			String candidateId = request.getParameter("candidateId");
 
-				CandidateBean candidate = CandidateDAO.getOne(candidateId);
-				request.setAttribute("candidate", candidate);
+			CandidateBean candidate = CandidateDAO.getOne(candidateId);
+			request.setAttribute("candidate", candidate);
 
-				RequestDispatcher rd = request.getRequestDispatcher("admin-verify.jsp");
-				rd.forward(request, response);
+			RequestDispatcher rd = request.getRequestDispatcher("candidateDetails.jsp");
+			rd.forward(request, response);
+		}
+		// Show candidate details (Pending)
+		else if (request.getParameter("approved") == null) {
+			String candidateId = request.getParameter("candidateId");
 
-			} catch (Throwable e) {
-				System.out.println(e);
-			}
+			CandidateBean candidate = CandidateDAO.getOne(candidateId);
+			request.setAttribute("candidate", candidate);
+
+			RequestDispatcher rd = request.getRequestDispatcher("candidateDetails.jsp");
+			rd.forward(request, response);
 		}
 	}
 

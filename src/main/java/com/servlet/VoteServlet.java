@@ -21,6 +21,13 @@ public class VoteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		// Voter not logged in
+		Object loggedIn = request.getSession(true).getAttribute("voter");
+		if (loggedIn == null) {
+			response.sendRedirect("login");
+			return;
+		}
+
 		List<CandidateBean> candidateList = CandidateDAO.getAllApproved();
 
 		request.setAttribute("candidateList", candidateList);
@@ -33,10 +40,10 @@ public class VoteServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String userId = request.getParameter("userId");
+		String candidateId = request.getParameter("candidateId");
 
-		CandidateDAO.addVote(userId);
-		VoterDAO.voted(userId);
+		CandidateDAO.addVote(candidateId);
+		VoterDAO.voted((String) request.getSession().getAttribute("userId"));
 
 		RequestDispatcher rd = request.getRequestDispatcher("voteSuccessful.jsp");
 		rd.forward(request, response);

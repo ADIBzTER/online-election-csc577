@@ -83,60 +83,113 @@ public class AdminDAO {
 		return admin;
 	}
 
-//	// Get only one student
-//	public static StudentBean getOne(String userId) {
-//
-//		// Preparing some objects/variable
-//		StudentBean student = new StudentBean();
-//		String sql = "SELECT * from students WHERE s_userid=?;";
-//
-//		PreparedStatement statement = null;
-//
-//		// Trace process
-//		System.out.println("in StudentDAO.getOne");
-//
-//		try {
-//			// Connect to DB
-//			connection = ConnectionManager.getConnection();
-//			statement = connection.prepareStatement(sql);
-//
-//			statement.setString(1, userId);
-//
-//			resultSet = statement.executeQuery();
-//
-//			// Iterate over the ResultSet, add row into object and object into list
-//			while (resultSet.next()) {
-//				student.setUserId(resultSet.getString("s_userid"));
-//				student.setName(resultSet.getString("s_name"));
-//				student.setFaculty(resultSet.getString("s_faculty"));
-//			}
-//		} catch (Exception e) {
-//			System.out.println("Error in StudentdAO.getOne " + e);
-//		}
-//		// Some exception handling
-//		finally {
-//			if (resultSet != null) {
-//				try {
-//					resultSet.close();
-//				} catch (Exception e) {
-//				}
-//				resultSet = null;
-//			}
-//			if (statement != null) {
-//				try {
-//					statement.close();
-//				} catch (Exception e) {
-//				}
-//				statement = null;
-//			}
-//			if (connection != null) {
-//				try {
-//					connection.close();
-//				} catch (Exception e) {
-//				}
-//				connection = null;
-//			}
-//		}
-//		return student;
-//	}
+	public static void endElection() {
+
+		// Preparing some objects for connection
+		PreparedStatement statement = null;
+
+		// Prepared statement
+		String sql = "UPDATE admins SET a_ended = ? WHERE a_userid=?;";
+
+		// Used to trace the process
+		System.out.println("in AdminDAO.endElection");
+
+		try {
+			// Connect to lipan_db
+			connection = ConnectionManager.getConnection();
+
+			// Prepared statement
+			statement = connection.prepareStatement(sql);
+
+			statement.setBoolean(1, true);
+			statement.setString(2, "dummy");
+
+			statement.executeUpdate();
+			System.out.println("Election Ended");
+
+		} catch (Exception e) {
+			System.out.println("Error in AdminDAo.endElection" + e);
+		}
+		// Some exception handling
+		finally {
+			if (resultSet != null) {
+				try {
+					resultSet.close();
+				} catch (Exception e) {
+				}
+				resultSet = null;
+			}
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (Exception e) {
+				}
+				statement = null;
+			}
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (Exception e) {
+				}
+				connection = null;
+			}
+		}
+	}
+
+	public static boolean isElectionEnded() {
+
+		// Preparing some objects for connection
+		PreparedStatement statement = null;
+		boolean status = false;
+
+		// Prepared statement
+		String sql = "SELECT a_ended FROM admins WHERE a_userid=?";
+
+		// Used to trace the process
+		System.out.println("in AdminDAO.electionStatus");
+
+		try {
+			// Connect to lipan_db
+			connection = ConnectionManager.getConnection();
+
+			// Prepared statement
+			statement = connection.prepareStatement(sql);
+
+			statement.setString(1, "dummy");
+
+			resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				status = resultSet.getBoolean("a_ended");
+			}
+			System.out.println("Get election status");
+
+		} catch (Exception e) {
+			System.out.println("Error in AdminDAo.electionStatus" + e);
+		}
+		// Some exception handling
+		finally {
+			if (resultSet != null) {
+				try {
+					resultSet.close();
+				} catch (Exception e) {
+				}
+				resultSet = null;
+			}
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (Exception e) {
+				}
+				statement = null;
+			}
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (Exception e) {
+				}
+				connection = null;
+			}
+		}
+		return status;
+	}
 }

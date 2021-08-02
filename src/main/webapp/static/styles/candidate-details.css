@@ -51,26 +51,25 @@ body {
   font-size: 1rem;
 }
 
-.center form #verify-button {
+.center form #approve-button {
   background-color: #118ab2;
   color: white;
   font-size: 1rem;
   border: none;
   border-radius: 5px;
-  width: 80px;
   height: 40px;
   -webkit-transition: 0.5s;
   transition: 0.5s;
 }
 
-.center form #verify-button:hover {
+.center form #approve-button:hover {
   cursor: pointer;
   background-color: #0b779b;
   -webkit-transition: 0.5s;
   transition: 0.5s;
 }
 
-.center form #cancel-button {
+.center form #decline-button {
   background-color: #f08080;
   color: white;
   font-size: 1rem;
@@ -82,9 +81,30 @@ body {
   transition: 0.5s;
 }
 
-.center form #cancel-button:hover {
+.center form #decline-button:hover {
   cursor: pointer;
   background-color: #e96262;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.center form #back-button {
+  background-color: #d1d1d1;
+  color: black;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  width: 80px;
+  height: 40px;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.center form #back-button:hover {
+  cursor: pointer;
+  background-color: #888888;
+  color: white;
+  font-size: 1rem;
   -webkit-transition: 0.5s;
   transition: 0.5s;
 }
@@ -98,4 +118,4 @@ body {
     height: 50px;
   }
 }
-/*# sourceMappingURL=candidate-register.css.map */
+/*# sourceMappingURL=candidate-details.css.map */

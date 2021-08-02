@@ -53,6 +53,7 @@
 			</div>
 
 			<input id='verify-button' type="submit" value="VERIFY" />
+			<button id='cancel-button'>CANCEL</button>
 		</form>
 	</div>
 
@@ -63,6 +64,12 @@
 			let photoUrl = URL.createObjectURL(photoInput.files[0]);
 			candidatePhoto.src = photoUrl;
 		};
+
+		const cancelButton = document.querySelector('#cancel-button');
+		cancelButton.onclick = (e) => {
+			e.preventDefault();
+			location.href = 'login';
+		}
 	</script>
 </body>
 

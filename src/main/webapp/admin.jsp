@@ -14,11 +14,20 @@
 </head>
 
 <body>
+	<button id="end-button">End Election</button>
+	<button id="logout-button">Logout</button>
 	<div class="center">
 
-		<div class="message">
-			<h1>Pending Verification</h1>
-		</div>
+		<c:forEach items="${ candidateList }" var="candidate">
+			<c:if test="${ !candidate.approved}">
+				<c:set var="hasPending" value="true" />
+			</c:if>
+		</c:forEach>
+		<c:if test="${ hasPending }">
+			<div class="message">
+				<h1>Pending Verification</h1>
+			</div>
+		</c:if>
 
 		<c:forEach items="${ candidateList }" var="candidate">
 			<c:if test="${ !candidate.approved}">
@@ -27,7 +36,8 @@
 						alt="candidate-image">
 					<div class="candidate-details">
 						<h3>Name: ${ candidate.name }</h3>
-						<h3>Student ID: ${ candidate.faculty }</h3>
+						<h3>Student ID: ${ candidate.userId }</h3>
+						<h3>Faculty: ${ candidate.faculty }</h3>
 					</div>
 					<button class="details-button"
 						onclick="location.href = 'admin?candidateId=${ candidate.userId }';">More
@@ -36,9 +46,16 @@
 			</c:if>
 		</c:forEach>
 
-		<div class="message">
-			<h1>Approved Candidates</h1>
-		</div>
+		<c:forEach items="${ candidateList }" var="candidate">
+			<c:if test="${ candidate.approved}">
+				<c:set var="hasApproved" value="true" />
+			</c:if>
+		</c:forEach>
+		<c:if test="${ hasApproved }">
+			<div class="message">
+				<h1>Approved Candidates</h1>
+			</div>
+		</c:if>
 
 		<c:forEach items="${ candidateList }" var="candidate">
 			<c:if test="${ candidate.approved}">
@@ -47,16 +64,32 @@
 						alt="candidate-image">
 					<div class="candidate-details">
 						<h3>Name: ${ candidate.name }</h3>
-						<h3>Student ID: ${ candidate.faculty }</h3>
+						<h3>Student ID: ${ candidate.userId }</h3>
+						<h3>Faculty: ${ candidate.faculty }</h3>
 					</div>
 					<button class="details-button"
-						onclick="location.href = 'admin?candidateId=${ candidate.userId }';">More
+						onclick="location.href = 'admin?candidateId=${ candidate.userId }&approved=true;'">More
 						Details</button>
 				</div>
 			</c:if>
 		</c:forEach>
 
 	</div>
+	<script>
+	const logoutButton = document.querySelector('#logout-button');
+	logoutButton.onclick = (e) => {
+		location.href = 'login';
+	}
+
+	const endButton = document.querySelector('#end-button');
+	endButton.onclick = (e) => {
+		const string = 'End The Election?';
+		if (confirm(string)) {
+			e.preventDefault();
+			location.href = 'admin?endElection=true';
+		}
+	}
+	</script>
 </body>
 
 </html>

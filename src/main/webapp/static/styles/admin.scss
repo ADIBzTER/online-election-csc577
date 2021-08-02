@@ -1,11 +1,53 @@
 $bg-color: white;
 $primary-color: #118ab2;
 $secondary-color: #bde0fe;
+$light-red: #f08080;
 
 body {
   background-color: $bg-color;
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#end-button {
+  position: fixed;
+  top: 10px;
+  right: 200px;
+  background-color: $light-red;
+  color: white;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  width: 150px;
+  height: 60px;
+  transition: 0.5s;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #e06767;
+    transition: 0.5s;
+  }
+}
+
+#logout-button {
+  position: fixed;
+  top: 10px;
+  right: 30px;
+  background-color: rgb(233, 233, 233);
+  color: black;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  width: 150px;
+  height: 60px;
+  transition: 0.5s;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #e06767;
+    color: white;
+    transition: 0.5s;
+  }
 }
 
 .center {
@@ -20,7 +62,8 @@ body {
   .row-div {
     display: grid;
     width: 80%;
-    grid-template-columns: 1fr 4fr 1fr;
+    grid-template-columns: 1fr 5fr 2fr;
+    column-gap: 5px;
     height: fit-content;
     margin-bottom: 50px;
     padding: 20px 30px;
@@ -32,17 +75,20 @@ body {
     -moz-box-shadow: 0px -1px 45px 1px rgba(0, 0, 0, 0.25);
 
     .candidate-image {
+      align-self: center;
       width: 100%;
       border: solid 1px black;
     }
     .candidate-details {
-			padding-left: 10px;
+      padding-left: 10px;
     }
 
     .details-button {
+      align-self: center;
       background-color: #40916c;
       color: white;
       font-size: 1rem;
+      height: 4rem;
       border: none;
       border-radius: 5px;
       transition: 0.5s;
@@ -56,5 +102,10 @@ body {
   }
 }
 
-@media (max-width: 700px) {
+@media only screen and (max-width: 700px) {
+  .center {
+    .row-div {
+      grid-template-columns: 2fr 3fr 2fr;
+    }
+  }
 }

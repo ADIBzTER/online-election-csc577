@@ -11,13 +11,13 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="static/styles/candidate-register.css">
-<title>Vote Successful | UiTM Jasin</title>
+<title>Register Successful | UiTM Jasin</title>
 </head>
 
 <body>
 	<div class="center">
-		<h1>Thanks For Your Vote!</h1>
-		<h2>Your Vote Has Been Recorded</h2>
+		<h1>Thanks For The Registration</h1>
+		<h2>Your Registration has been submitted</h2>
 	</div>
 
 	<script>
