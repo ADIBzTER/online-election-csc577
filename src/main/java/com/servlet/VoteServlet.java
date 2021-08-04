@@ -43,7 +43,10 @@ public class VoteServlet extends HttpServlet {
 		String candidateId = request.getParameter("candidateId");
 
 		CandidateDAO.addVote(candidateId);
-		VoterDAO.voted((String) request.getSession().getAttribute("userId"));
+
+		VoterBean voter = new VoterBean();
+		voter.setUserId((String) request.getSession().getAttribute("userId"));
+		VoterDAO.voted(voter);
 
 		RequestDispatcher rd = request.getRequestDispatcher("voteSuccessful.jsp");
 		rd.forward(request, response);

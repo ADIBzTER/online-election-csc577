@@ -9,9 +9,7 @@ import javax.servlet.annotation.*;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
 
-import com.config.*;
 import com.bean.*;
 import com.dao.*;
 
